@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mvn package
+
+clojure -M:project/clojars target/slf4j-queue.jar
