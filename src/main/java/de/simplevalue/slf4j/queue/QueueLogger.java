@@ -13,16 +13,20 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class QueueLogger implements org.slf4j.Logger, Serializable {
 
-    private BlockingQueue queue = new LinkedBlockingQueue();
-
-    public static final QueueLogger QUEUE_LOGGER = new QueueLogger();
+    private static BlockingQueue queue = new LinkedBlockingQueue();
 
     public static BlockingQueue getQueue() {
-        return QUEUE_LOGGER.queue;
+        return queue;
     }
 
+    private String name;
+
     public String getName() {
-        return "de.simplevalue.slf4j.queue.Logger";
+        return name;
+    }
+
+    public QueueLogger(String name) {
+        this.name = name;
     }
 
     @Override
@@ -413,6 +417,8 @@ public class QueueLogger implements org.slf4j.Logger, Serializable {
     protected void handleNormalizedLoggingCall(Level level, Marker marker, String msg, Object[] arguments, Throwable throwable) {
         Map<String,Object> data = new HashMap();
         data.put("level", level.toString());
+        data.put("levelInt", level.toInt());
+        data.put("name", name);
         data.put("marker", marker);
         data.put("msg", msg);
         data.put("arguments", arguments);

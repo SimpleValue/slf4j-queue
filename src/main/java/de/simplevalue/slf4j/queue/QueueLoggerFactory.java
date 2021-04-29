@@ -9,7 +9,7 @@ public class QueueLoggerFactory implements ILoggerFactory {
     }
 
     public QueueLogger getLogger(String name) {
-        return QueueLogger.QUEUE_LOGGER;
+        return new QueueLogger(name);
     }
 
 }
